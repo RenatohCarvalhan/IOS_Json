@@ -21,23 +21,9 @@
 @implementation RubyThreeViewController
 
 @synthesize TableView;
+@synthesize nameOfArray;
+@synthesize indexInt;
 
-/*
- @synthesize cityArray;
- @synthesize imageURLArray;
- @synthesize imageArray;
- */
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.title = @"Profile";
-        self.tabBarItem.image = [UIImage imageNamed:@"111-user.png"];
-        
-        // Custom initialization
-    }
-    return self;
-}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -79,9 +65,9 @@
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     NSDictionary *allDataDictioray = [NSJSONSerialization JSONObjectWithData:webData options:0 error:nil];
-    NSArray *arrayOfName = [allDataDictioray objectForKey:@"results"];
+    nameOfArray = [allDataDictioray objectForKey:@"results"];
     
-    for (NSDictionary *diction in arrayOfName) {
+    for (NSDictionary *diction in nameOfArray) {
         NSString *label = [diction objectForKey:@"name"];
         
         [array addObject:label];
@@ -112,19 +98,15 @@
     return cell;
     
 }
-/*
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ProfileViewController *profileVC = [[ProfileViewController alloc]init];
-    profileVC.userProfile = self.nameArray[indexPath.row];
-    
-     profileVC.profileCity = self.cityArray[indexPath.row];
-     profileVC.profileImageFile = self.imageArray[indexPath.row];
-     profileVC.profileImageURL = self.imageURLArray[indexPath.row];
-     
+    profileVC.userProfile = self.nameOfArray[indexPath.row];
+
     [self.navigationController pushViewController:profileVC animated:YES];
  
 }
- */
+
 @end
 

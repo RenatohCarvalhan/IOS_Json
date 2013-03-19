@@ -11,4 +11,6 @@
 @interface RubyThreeViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITableView *TableView;
+@property (strong, nonatomic) NSArray *nameOfArray;
+@property NSInteger *indexInt;
 @end
