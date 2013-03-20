@@ -12,7 +12,7 @@
 #import "RubyThreeViewController.h"
 
 @implementation ProfileViewController
-NSMutableData *webData;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -52,19 +52,31 @@ NSMutableData *webData;
         
         self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
         self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        self.scrollView.contentSize = CGSizeMake(320,480);
+        self.scrollView.contentSize = CGSizeMake(320,1000);
+        
+        NSString *imageJSON = [self.userProfile objectForKey:@"image"];
+        NSArray *image = [imageJSON valueForKey:@"available_sizes"];
+        UITextView *logo = [[UITextView alloc] initWithFrame:CGRectMake(12,10,300,500)];
+        logo.text = [NSString stringWithFormat:@"http://www.crunchbase.com/%@", image[0][1]];
+ 
+        UIImageView *profileImageView = [[UIImageView alloc] init];
+        profileImageView.frame = CGRectMake(50, 5, 150, 150);
+        NSURL *imageURL = [NSURL URLWithString:logo.text];
+        [profileImageView setImageWithURL:imageURL ];
+        [self.scrollView addSubview:profileImageView];
+        
         
         NSString *nameJSON = [self.userProfile objectForKey:@"name"];
         UILabel *nameLabel = [[UILabel alloc] init];
-        nameLabel.frame = CGRectMake(20,140,280,40);
+        nameLabel.frame = CGRectMake(20,160,280,40);
         nameLabel.text = [NSString stringWithFormat:@"Name: %@", nameJSON];
         [self.scrollView addSubview:nameLabel];
         
+        
         NSString *overviewJSON = [self.userProfile objectForKey:@"overview"];
-        UITextView *overviewLabel = [[UITextView alloc] initWithFrame:CGRectMake(12,260,300,180)];
-        overviewLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
+        UITextView *overviewLabel = [[UITextView alloc] initWithFrame:CGRectMake(12,200,300,500)];
         overviewLabel.editable = NO;
-        overviewLabel.text = [NSString stringWithFormat:@"OverView: %@", overviewJSON];
+        overviewLabel.text = [NSString stringWithFormat:@"OverView: %@", overviewJSON ];
         [self.scrollView addSubview:overviewLabel];
         
         [self.view addSubview:self.scrollView];
