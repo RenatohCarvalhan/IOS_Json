@@ -12,5 +12,5 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *TableView;
 @property (strong, nonatomic) NSArray *nameOfArray;
-@property NSInteger *indexInt;
+@property (strong, nonatomic) NSDictionary *Transf;
 @end

@@ -22,7 +22,7 @@
 
 @synthesize TableView;
 @synthesize nameOfArray;
-@synthesize indexInt;
+@synthesize Transf;
 
 - (void)viewDidLoad
 {
@@ -69,7 +69,7 @@
     
     for (NSDictionary *diction in nameOfArray) {
         NSString *label = [diction objectForKey:@"name"];
-        
+    
         [array addObject:label];
     }
     [[self TableView]reloadData];
@@ -95,6 +95,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.textLabel.text = [array objectAtIndex:indexPath.row];
+
     return cell;
     
 }
@@ -103,7 +104,8 @@
 {
     ProfileViewController *profileVC = [[ProfileViewController alloc]init];
     profileVC.userProfile = self.nameOfArray[indexPath.row];
-
+       Transf = nameOfArray[indexPath.row];
+    
     [self.navigationController pushViewController:profileVC animated:YES];
  
 }
